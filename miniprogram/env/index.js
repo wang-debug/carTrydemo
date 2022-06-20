@@ -1,5 +1,5 @@
 module.exports = {
     Dev:{
-        baseApi:"http://localhost:3000"
+        baseApi:"http://47.106.205.15"
     }
 }
