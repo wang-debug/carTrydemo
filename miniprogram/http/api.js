@@ -1,0 +1,12 @@
+module.exports={
+    getSession:"/api/mp/getSession",
+    login:"/api/mp/login",
+    selectUser:"/api/mp/selectUser",
+    addCar:"/api/mp/addCar",
+    selectCar:"/api/mp/selectCar",
+    deleteCar:"/api/mp/deleteCar",
+    getToken:"/api/mp/getToken",
+    updateCar:"/api/mp/updateCar",
+    changeStatus:"/api/mp/changeStatus",
+    showDetail:"/api/mp/showDetail"
+}

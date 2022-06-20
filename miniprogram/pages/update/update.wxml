@@ -1,0 +1,31 @@
+<!--pages/update/update.wxml-->
+<cu-custom bgColor="bg-gradual-white" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{username}}的车辆系统</view>
+</cu-custom>
+<form>
+  <view class="cu-bar bg-white margin-top">
+    <view class="action">
+      增补信息
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="grid col-2 grid-square flex-sub">
+      <view wx:for="{{imgList}}" wx:key="{{index}}" class="{{!item.url ? 'solids' : 'bg-img'}}" bindtap="{{!item.url ? 'ChooseImage' : 'ViewImage'}}" data-index="{{index}}" data-url="{{item.url}}">
+        <view class="text-center margin" wx:if="{{!item.url}}">{{item.title}}</view>
+       <image wx:if="{{item.url}}" src='{{imgList[index].url}}' bindtap="ViewImage" data-url="{{imgList[index].url}}" mode='aspectFill'></image>
+        
+        
+        <text wx:if="{{!item.url}}" class="cuIcon-cameraadd"></text>
+<view class="cu-tag bg-olive text-black" wx:if="{{item.url}}" catchtap="DelImg" data-index="{{index}}">
+          <text class="cuIcon-close"></text>
+          <text>{{item.title}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</form>
+<view class="padding-xl">
+    <button class="cu-btn block line-orange lg" bindtap="updateCar">
+      <text class="cuIcon-upload"></text> 提交</button>
+  </view>

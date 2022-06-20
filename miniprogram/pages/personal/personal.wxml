@@ -1,0 +1,79 @@
+<cu-custom bgColor="bg-gradual-white" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{username}}的车辆系统</view>
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-check text-olive"></text>请选择业务
+  </view>
+</view>
+<view class="grid col-2 padding-sm">
+  <view class="padding-sm" bindtap="gotoAd">
+    <view class="bg-olive padding radius text-center shadow-blur">
+      <view class="text-lg">新建车辆</view>
+    </view>
+  </view>
+  <view class="padding-sm" bindtap="gotoUpdate">
+    <view class="bg-olive padding radius text-center shadow-blur">
+      <view class="text-lg">车辆系统信息增补</view>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-white search">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="输入车牌号搜索" confirm-type="search" bindinput="searchIcon"></input>
+  </view>
+</view>
+<view class="cu-list">
+  <view class="cu-list col-4 grid gridBorder:no-border">
+    <view class="cu-item">
+      <text>车牌号</text>
+    </view>
+    <view class="cu-item">
+      <text>登记日期</text>
+    </view>
+    <view class="cu-item">
+      <text>整车照片</text>
+    </view>
+  </view>
+
+</view>
+<view class="cu-list" style="margin-top: 0;" wx:if="{{carList.length == 0}}">
+  <view class="cu-list col-1 grid">
+    <view class="cu-item">
+      <text>No Data</text>
+    </view>
+
+  </view>
+
+</view>
+
+<view class="cu-list" style="margin-top: 0;">
+
+  <view class="cu-item" wx:for="{{carList}}" wx:key wx:if="{{item.isShow}}">
+
+    <view class="cu-list col-4 grid">
+      <view class="cu-item" bindtap="gotoUpdate" data-carNo="{{item.carNo}}">
+        <text>{{item.carNo}}</text>
+      </view>
+      <view class="cu-item">
+        <text>{{item.date}}</text>
+      </view>
+
+      <view class="cu-item" style="height: 40.66px;" bindtap="ViewImage" data-url="{{item.wholePhoto}}">
+        <image src="../../images/top_s.png" mode="aspectFit"></image>
+      </view>
+
+      <view class="cu-item padding">
+        <view class="cu-list col-2 grid">
+          <view wx-if="{{item.status == '删除'}}" class="cu-item cu-tag radius bg-red" style="width:50%;margin-left: -40px;" bindtap="deleteCar" data-car="{{item.carNo}}">{{item.status}}</view>
+          <view wx-if="{{item.status == '删除'}}" class="cu-item cu-tag radius bg-blue" style="width:50%;margin-left: 0px;" bindtap="rejectCar" data-car="{{item.carNo}}">注销</view>
+        </view>
+
+        <view wx-if="{{item.status == '已受理'}}" class="cu-tag radius bg-olive" style="width:50%;margin-left: -20px;">{{item.status}}</view>
+      </view>
+    </view>
+
+  </view>
+</view>

@@ -1,0 +1,22 @@
+<!--pages/home/home.wxml-->
+<cu-custom bgColor="bg-gradual-white" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">主页</view>
+</cu-custom>
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-home text-olive"></text>请选择车辆系统
+  </view>
+</view>
+<view class="grid col-2 padding-sm">
+  <view class="padding-sm" bindtap="gotoPersonal">
+    <view class="bg-olive padding radius text-center shadow-blur">
+      <view class="text-lg">{{username}}的车辆系统</view>
+    </view>
+  </view>
+  <view class="padding-sm" bindtap = "gotoCompany">
+    <view class="bg-olive padding radius text-center shadow-blur">
+      <view class="text-lg">公司车辆系统</view>
+    </view>
+  </view>
+</view>

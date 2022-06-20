@@ -1,11 +1,25 @@
 {
 	"pages": [
-		"pages/index/index"
+		"pages/index/index",
+		"pages/register/register",
+		"pages/reset/reset",
+		"pages/home/home",
+		"pages/personal/personal",
+		"pages/company/company",
+		"pages/addCar/addCar",
+		"pages/update/update"
 	],
 	"window": {
-		"navigationBarTextStyle": "black",
-		"navigationStyle": "custom"
-	},
+		"navigationBarBackgroundColor": "#39b54a",
+		"navigationBarTitleText": "Color UI",
+		"navigationStyle": "custom", 
+		"navigationBarTextStyle": "white"
+	   },
+		
+		"usingComponents": {
+		  "cu-custom":"/assets/wxss/components/cu-custom"
+		},
+	  
 	"style": "v2",
 	"sitemapLocation": "sitemap.json"
 }

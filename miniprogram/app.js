@@ -1,7 +1,38 @@
+let Api = require("./http/api.js");
+let request = require("./http/request.js");
+let router = require("./utils/router.js")
+let config = require("./env/index.js")
+let env="Dev";
+App.version = "1.0.0";
+App.config = config[env];  //公共文件
 App({
   flag: false,
+  config:config[env],//视图用
+  Api,
+  router,
+  get:request.fetch,
+  post:(url,data,option = {}) =>{
+    option.method = "post";
+    return request.fetch(url,data,option);
+  },
+  globalData: {
+    userInfo: null
+  },
   async onLaunch (e) {
-    this.initcloud()
+    this.initcloud();
+    wx.getSystemInfo({
+      success: e => {
+          this.globalData.StatusBar = e.statusBarHeight;
+            let capsule = wx.getMenuButtonBoundingClientRect();
+            if (capsule) {
+              this.globalData.Custom = capsule;
+              this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
+            } else {
+              this.globalData.CustomBar = e.statusBarHeight + 50;
+            }
+          }
+    })
+    
   },
   /**
    * 初始化云开发环境（支持环境共享和正常两种模式）

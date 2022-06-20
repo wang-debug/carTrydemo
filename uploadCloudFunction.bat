@@ -1,0 +1,1 @@
+"S:\Web\微信web开发者工具\cli.bat" cloud functions deploy --e cloud1-3g4yswbtaff54b8d --n quickstartFunctions --r --project "D:\cute\Git\carTry" --report_first --report

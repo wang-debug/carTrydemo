@@ -1,70 +1,31 @@
-<view class="model" wx:if="{{noserver}}">
-  <image src="../../images/main_s.png"></image>
-  <view class="no_tips">当前小程序无法支持宽屏设备，非常抱歉！</view>
-</view>
-<view bindtouchstart="movepage" bindtouchend="movepage" class="container" wx:else>
-  <view class="model" wx:if="{{spage==0||epage==0}}">
-    <image src="../../images/top_s.png"></image>
-    <view class="top_black"></view>
-    <view class="top_title">{{info.start.title}}</view>
-    <view class="top_local">{{info.start.local}}</view>
-    <view class="top_time">{{info.start.time}}</view>
-    <view class="top_hold">{{info.start.hold}}</view>
-  </view>
-  <view class="model {{spage!=1?(spage<epage?'model_show':''):(spage<epage?'':'model_hide')}}" wx:if="{{spage==1||epage==1}}">
-    <image src="../../images/main_s.png"></image>
-    <view class="main_title">诚挚邀请</view>
-    <view class="main_entil">INVITATIONLETTER</view>
-    <view class="invite_title">{{info.invite.title}}</view>
-    <view class="invite_text">{{info.invite.text}}</view>
-  </view>
-  <view class="model {{spage!=2?(spage<epage?'model_show':''):(spage<epage?'':'model_hide')}}" wx:if="{{spage==2||epage==2}}">
-    <image src="../../images/main_s.png"></image>
-    <view class="main_title">会议流程</view>
-    <view class="main_entil">MEETINGFLOW</view>
-    <view class="metting_model">
-      <view class="line"></view>
-      <view class="item" wx:for="{{info.meeting}}" wx:key="index">
-        <view class="item_text">{{item.time}}</view>
-        <image src="../../images/point.svg"></image>
-        <view class="item_text">{{item.text}}</view>
-      </view>
+<cu-custom bgColor="bg-gradual-white"><view slot="content">登录</view></cu-custom>
+<view class="container">
+    <view class="form-box">
+
+    	<view class="form-item">
+    		<input class="username" value="{{username}}" bindinput="bindUsernameInput" placeholder="账号" auto-focus/>
+    		<image wx:if="{{ username.length > 0 }}" id="clear-username" class="clear" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+    	</view>
+
+    	<view class="form-item">
+    		<input class="password" value="{{password}}" password bindinput="bindPasswordInput" placeholder="密码"/>
+    		<image class="clear" id="clear-password" wx:if="{{ password.length > 0 }}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+    	</view>
+
+		<view class="form-item-code" wx-if="{{loginErrorCount >= 3}}">
+			<view class="form-item code-item">
+				<input class="code" value="{{code}}" bindinput="bindCodeInput" placeholder="验证码"/>
+				<image class="clear" id="clear-code" wx:if="{{ code.length > 0 }}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+			</view>
+			<image class="code-img" src="https://dl.reg.163.com/cp?pd=yanxuan_web&pkid=SkeBZeG&random=1489903563234"></image>
+		</view>
+
+    	<button type="default" class="login-btn" bindtap="getUserInfo">登录</button>
+
+    	<view class="form-item-text">
+    		<navigator url="/pages/register/register" class="register">注册账号</navigator>
+			<navigator url="/pages/reset/reset" class="reset">忘记密码</navigator>
+    	</view>
+
     </view>
-  </view>
-  <view class="model {{spage!=3?(spage<epage?'model_show':''):(spage<epage?'':'model_hide')}}" wx:if="{{spage==3||epage==3}}">
-    <image src="../../images/main_s.png"></image>
-    <view class="main_title">活动地址</view>
-    <view class="main_entil">ADDRESS</view>
-    <map class="map" latitude="{{info.address.point[0]}}" longitude="{{info.address.point[1]}}" enable-3D="true" enable-building="true" markers="{{[info.address.marker]}}" show-location="true" catchregionchange="changeno"></map>
-    <view class="map_line"></view>
-    <view class="address_item">
-      <image src="../../images/map.svg"></image>
-      <view>{{info.address.local}}</view>
-    </view>
-    <view class="address_item">
-      <image src="../../images/time.svg"></image>
-      <view>{{info.address.time}}</view>
-    </view>
-    <view class="address_item">
-      <image src="../../images/tel.svg"></image>
-      <view>{{info.address.tel}}</view>
-    </view>
-  </view>
-  <view class="model {{spage!=4?(spage<epage?'model_show':''):(spage<epage?'':'model_hide')}}" wx:if="{{spage==4||epage==4}}">
-    <image src="../../images/main_s.png"></image>
-    <view class="main_title">会议报名</view>
-    <view class="main_entil">REGISTRATION</view>
-    <view class="form" bindtouchstart="changeno" bindtouchend="changeno" wx:if="{{status==0}}">
-      <view class="form_item" wx:for="{{info.form}}" wx:key="index">
-        <view>{{item.name}}</view>
-        <input bindinput="oninput" data-key="{{index}}" placeholder="{{item.place}}" placeholder-class="place" cursor-spacing="20"/>
-      </view>
-      <button bindtap="submit">提交</button>
-    </view>
-    <view class="review">
-      <image src="{{info.review[status].image}}"></image>
-      <view class="title">{{info.review[status].title}}</view>
-      <view class="des">{{info.review[status].des}}</view>
-    </view>
-  </view>
 </view>
