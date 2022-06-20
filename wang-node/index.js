@@ -5,7 +5,7 @@ var mp = require('./routes/mp');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static('addCar'))
+app.use(express.static('../src'));
 
 app.use('/api/mp',mp);
 

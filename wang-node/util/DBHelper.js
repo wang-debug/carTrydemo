@@ -6,7 +6,7 @@ class DBHelper{
             host:'localhost',
             port:'3306',
             user:'root',
-            password:'123456',
+            password:'Wft010527!',
             database:'car'
         });
         conn.connect();
