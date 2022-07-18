@@ -1,5 +1,5 @@
 <!--pages/home/home.wxml-->
-<cu-custom bgColor="bg-gradual-white" isBack="{{true}}">
+<cu-custom bgColor="bg-olive" isBack="{{true}}" url="index">
   <view slot="backText">返回</view>
   <view slot="content">主页</view>
 </cu-custom>
@@ -11,12 +11,12 @@
 <view class="grid col-2 padding-sm">
   <view class="padding-sm" bindtap="gotoPersonal">
     <view class="bg-olive padding radius text-center shadow-blur">
-      <view class="text-lg">{{username}}的车辆系统</view>
+      <view class="text-lg">业务一组车辆系统</view>
     </view>
   </view>
   <view class="padding-sm" bindtap = "gotoCompany">
     <view class="bg-olive padding radius text-center shadow-blur">
-      <view class="text-lg">公司车辆系统</view>
+      <view class="text-lg">业务二组车辆系统</view>
     </view>
   </view>
 </view>

@@ -25,6 +25,9 @@ Page({
       })
     }
   },
+  gotoRegister(){
+    router.push({path:"register"})
+  },
   //获取登录的code
   getSession(){
     wx.login({

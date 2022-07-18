@@ -1,7 +1,7 @@
 <!--pages/update/update.wxml-->
-<cu-custom bgColor="bg-gradual-white" isBack="{{true}}">
+<cu-custom bgColor="bg-olive" isBack="{{true}}" url="personal" userinfo="{{username}}" company="{{company}}">
   <view slot="backText">返回</view>
-  <view slot="content">{{username}}的车辆系统</view>
+  <view slot="content">{{carNo}}的信息</view>
 </cu-custom>
 <form>
   <view class="cu-bar bg-white margin-top">

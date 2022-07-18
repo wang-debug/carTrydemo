@@ -9,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    company: store.getItem('company'),
-    username: store.getItem('username'),
+    company: null,//store.getItem('company'),
+    username:null,// store.getItem('username'),
+    updateList:[],
   },
 
   /**
@@ -18,15 +19,25 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    this.setData({ carNo: options.carno })
-    this.getCarList().then(res=>{
-      console.log(res)
-      this.setData({
-        imgList:[{ title: "发动机照",url:res.engine}, { title: "车架照" ,url:res.VIN}, { title: "方向机照" ,url:res.traverse}, { title: "变速器照",url:res.speedchanger ,url:res.speedchanger}, { title: "前桥照" ,url:res.front}, { title: "后桥照",url:res.back }]
+    if(options.username && options.company && options.carno)
+    {
+      this.setData({ carNo: options.carno,username:options.username,company:Number(options.company) })
+      this.getCarList().then(res=>{
+        console.log(res)
+        if(res)
+        {
+           this.setData({
+          imgList:[{ title: "发动机照",url:res.engine}, { title: "车架照" ,url:res.VIN}, { title: "方向机照" ,url:res.traverse}, { title: "变速器照",url:res.speedchanger ,url:res.speedchanger}, { title: "前桥照" ,url:res.front}, { title: "后桥照",url:res.back },
+          { title: "车架号照",url:res.VIN_number},{ title: "发动机号照",url:res.engine_number}]
+        })
+        }
+       
       })
-    })
+    }
+    
   },
   ChooseImage(e) {
+    this.data.updateList.push(e.currentTarget.dataset.index)
     console.log(e.currentTarget.dataset.index)
     var index = e.currentTarget.dataset.index;
     let str = 'imgList[' + index + '].url'
@@ -69,7 +80,7 @@ Page({
   uploadImage() {
     var that = this;
     let PromiseArr = [];
-    for (let i = 0; i < 6; i++) {
+    for (var i of this.data.updateList) {
       let str = 'imgList[' + i + '].url'
       if (that.data.imgList[i].url) {
         PromiseArr.push(new Promise(function (resolve, reject) {
@@ -78,7 +89,7 @@ Page({
             cloudPath: timestamp + '.png',
             filePath: that.data.imgList[i].url,
             success: res => {
-              console.log(res)
+              console.log(res,str)
               that.setData({
                 [str]: res.fileID
               })
@@ -101,7 +112,9 @@ Page({
       carInfo.speedchanger = that.data.imgList[3].url;
       carInfo.front = that.data.imgList[4].url;
       carInfo.back = that.data.imgList[5].url;
-      console.log(carInfo)
+      carInfo.VIN_number = that.data.imgList[6].url;
+      carInfo.engine_number = that.data.imgList[7].url;
+      console.log(carInfo);
       app.get(Api.updateCar, { carInfo }).then(res => {
         console.log(res)
         wx.showModal({
@@ -109,10 +122,14 @@ Page({
           content: res.message,
           showCancel: false
         });
-        router
+        
       })
     }).catch(err => {
-      console.log(err)
+      wx.showModal({
+        title: '失败信息',
+        content: res.message,
+        showCancel: true
+      })
     })
   },
   updateCar() {
@@ -122,8 +139,8 @@ Page({
   getCarList() {
     var that = this;
     var userInfo = {};
-    userInfo.username = store.getItem('username');
-    userInfo.company = store.getItem('company');
+    userInfo.username = that.data.username;//store.getItem('username');
+    userInfo.company = that.data.company;//store.getItem('company');
     userInfo.carNo = this.data.carNo;
     console.log(userInfo)
     return new Promise(function (resolve, reject) {

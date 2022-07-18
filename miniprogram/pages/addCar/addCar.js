@@ -14,7 +14,20 @@ Page({
     imgPath:'',
     company: store.getItem('company'),
     username: store.getItem('username'),
-    carNo: ''
+    carNo: '',
+    picker: [0, 1, 2,3],
+  },
+  PickerChange(e) {
+    // console.log(e);
+    this.setData({
+      index: e.detail.value
+    })
+  },
+  changeCode(e){
+    // console.log(e.detail)
+    this.setData({
+      is_code: e.detail.value
+    })
   },
   bindUsernameInput: function (e) {
     this.setData({
@@ -22,7 +35,6 @@ Page({
     });
   },
   bindCarNoInput: function (e) {
-
     this.setData({
       carNo: e.detail.value
     });
@@ -43,6 +55,7 @@ Page({
   },
   scanImageInfo: function (imageData) {
     var that = this;
+    console.log(111)
     const detectUrl = `https://aip.baidubce.com/rest/2.0/ocr/v1/license_plate?access_token=`+this.data.access_token;
     //显示加载界面
     wx.showLoading({
@@ -185,6 +198,8 @@ Page({
     carInfo.company = that.data.company;
     carInfo.carNo = that.data.carNo;
     carInfo.date = date;
+    carInfo.is_code = that.data.is_code;
+    carInfo.plate_number = that.data.index;
     console.log(carInfo)
     app.get(Api.addCar, { carInfo }).then(res => {
       console.log(res)
@@ -194,7 +209,14 @@ Page({
           content: '注册成功！',
           showCancel: false
         });
-        router.push("personal");
+        router.push({path:"personal",query:{username:this.data.username,company:this.data.company},openType:'redirect'});
+      }
+      else{
+        wx.showModal({
+          title: '失败信息',
+          content: '注册失败！',
+          showCancel: true
+        });
       }
     })
 
@@ -206,7 +228,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({username:options.username,company:Number(options.company)})
   },
 
   /**

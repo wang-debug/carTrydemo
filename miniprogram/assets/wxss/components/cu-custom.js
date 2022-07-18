@@ -1,3 +1,5 @@
+const router = require("../../../utils/router");
+
 const app = getApp();
 Component({
   /**
@@ -23,10 +25,23 @@ Component({
       type: [Boolean, String],
       default: false
     },
+    url:{
+      type: String,
+      default: 'index'
+    },
+
     bgImage: {
       type: String,
       default: ''
     },
+    userinfo: {
+      type: String,
+      default: {}
+    },
+    company:{
+      type: Number,
+      default: 0
+    }
   },
   /**
    * 组件的初始数据
@@ -41,9 +56,8 @@ Component({
    */
   methods: {
     BackPage() {
-      wx.navigateBack({
-        delta: 1
-      });
+      console.log(this.data)
+       router.push({path:this.data.url,query:{username:this.data.userinfo,company:this.data.company},openType:'redirect'})
     },
     toHome(){
       wx.reLaunch({

@@ -1,31 +1,56 @@
-<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">用户注册</view></cu-custom>
-<view class="container">
-    <view class="form-box">
+<cu-custom bgColor="bg-olive" isBack="{{true}}" url="index"><view slot="backText">返回</view><view slot="content">用户注册</view></cu-custom>
 
-    	<view class="form-item">
-    		<input class="username" value="{{username}}" bindinput="bindUsernameInput" placeholder="用户名" auto-focus/>
-    		<image wx:if="{{ username.length > 0 }}" id="clear-username" class="clear" src="/static/images/clear_input.png" catchtap="clearInput"></image>
-    	</view>
+<view class="padding">
+	<view class="padding-xl radius shadow bg-white">
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-profile text-gray"></text>
+				<input class="username" value="{{username}}" bindinput="bindUsernameInput" placeholder="账号" auto-focus />
+			</view>
+			<view class="action" id="clear-username" bindtap="clearInput">
+				<text class="cuIcon-roundclose lg text-gray" wx:if="{{ username.length > 0 }}"></text>
+			</view>
 
-    	<view class="form-item">
-    		<input class="password" value="{{password}}" password bindinput="bindPasswordInput" placeholder="密码"/>
-    		<image class="clear" id="clear-password" wx:if="{{ password.length > 0 }}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
-    	</view>
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-lock text-gray"></text>
+				<input class="password" value="{{password}}" password bindinput="bindPasswordInput" placeholder="密码" />
+			</view>
+			<view class="action" id="clear-password" bindtap="clearInput">
+				<text class="cuIcon-roundclose lg text-gray" wx:if="{{ password.length > 0 }}"></text>
+			</view>
+		</view>
 
-        <view class="form-item">
-    		<input class="password" value="{{confirmPassword}}" password bindinput="bindConfirmPasswordInput" placeholder="确认密码"/>
-    		<image class="clear" id="clear-confirm-password" wx:if="{{ confirmPassword.length > 0 }}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
-    	</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-lock text-gray"></text>
+				<input class="password" value="{{confirmPassword}}" password bindinput="bindConfirmPasswordInput" placeholder="确认密码" />
+			</view>
+			<view class="action" id="clear-confirm-password" bindtap="clearInput">
+				<text class="cuIcon-roundclose lg text-gray" wx:if="{{ confirmPassword.length > 0 }}"></text>
+			</view>
+		</view>
 
-		<view class="form-item-code" >
-			<view class="form-item code-item">
+		<!-- <view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-lock text-gray"></text>
+				<input class="password" value="{{group}}" bindinput="bindGroupInput" placeholder="所属业务组" />
+			</view>
+		</view> -->
+
+        <view class="form-item-code"style="padding-left: 28px;">
+			<view class="form-item code-item" style="width: 50%;">
 				<input class="code" value="{{code}}" bindinput="bindCodeInput" placeholder="验证码"/>
-				<image class="clear" id="clear-code" wx:if="{{ code.length > 0 }}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+				<text class="cuIcon-roundclose text-gray" id="clear-code" wx:if="{{ code.length > 0 }}" catchtap="clearInput"></text>
 			</view>
 			<image class="code-img" src="https://dl.reg.163.com/cp?pd=yanxuan_web&pkid=SkeBZeG&random=1489903563234"></image>
 		</view>
+		
+		<view class="padding flex flex-direction">
+			<button class="cu-btn bg-grey lg" bindtap="startRegister">注册</button>
+		</view>
+		
 
-    	<button type="default" class="login-btn" bindtap="startRegister">注册</button>
-
-    </view>
+	</view>
 </view>

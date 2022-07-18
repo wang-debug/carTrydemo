@@ -18,8 +18,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    if(options.username && options.company)
+    {
+      this.setData({username:options.username,
+      company:Number(options.company)});
+      console.log(this.data)
     this.getCarList().then(res => {
     })
+    }
+    
   },
   searchIcon(e) {
     let key = e.detail.value.toLowerCase();
@@ -54,15 +62,19 @@ Page({
         console.log(res)
         that.setData({ carList: res.data.carInfo });
         resolve();
+      }).catch(err =>{
+        wx.showModal({
+          title:"失败"
+        })
       })
     })
 
   },
   gotoAd() {
-    router.push("addCar");
+    router.push({path:"addCar",query:{username:this.data.username,company:this.data.company},openType:'redirect'});
   },
   gotoUpdate(e){
-    router.push({path:"update",query:e.currentTarget.dataset})
+    router.push({path:"update",query:{carno:e.currentTarget.dataset.carno,username:this.data.username,company:this.data.company},openType:'redirect'})
   },
   deleteCar(e) {
     let userInfo = {};
@@ -85,9 +97,8 @@ Page({
             wx.showModal({
               title: "删除成功"
             })
-            wx.reLaunch({
-              url: '../personal/personal',
-            })
+            router.push({path:"personal",query:{username:this.data.username,company:this.data.company},openType:'redirect'})
+            
           })
         }
       }
@@ -110,9 +121,7 @@ Page({
             wx.showModal({
               title: "注销成功"
             })
-            wx.reLaunch({
-              url: '../personal/personal',
-            })
+            router.push({path:"personal",query:{username:this.data.username,company:this.data.company},openType:'redirect'})
           })
         }
       }

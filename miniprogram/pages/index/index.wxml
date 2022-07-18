@@ -1,31 +1,33 @@
-<cu-custom bgColor="bg-gradual-white"><view slot="content">登录</view></cu-custom>
-<view class="container">
-    <view class="form-box">
-
-    	<view class="form-item">
-    		<input class="username" value="{{username}}" bindinput="bindUsernameInput" placeholder="账号" auto-focus/>
-    		<image wx:if="{{ username.length > 0 }}" id="clear-username" class="clear" src="/static/images/clear_input.png" catchtap="clearInput"></image>
-    	</view>
-
-    	<view class="form-item">
-    		<input class="password" value="{{password}}" password bindinput="bindPasswordInput" placeholder="密码"/>
-    		<image class="clear" id="clear-password" wx:if="{{ password.length > 0 }}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
-    	</view>
-
-		<view class="form-item-code" wx-if="{{loginErrorCount >= 3}}">
-			<view class="form-item code-item">
-				<input class="code" value="{{code}}" bindinput="bindCodeInput" placeholder="验证码"/>
-				<image class="clear" id="clear-code" wx:if="{{ code.length > 0 }}" src="/static/images/clear_input.png" catchtap="clearInput"></image>
+<cu-custom bgColor="bg-olive">
+	<view slot="content">登录</view>
+</cu-custom>
+<view class="padding">
+	<view class="padding-xl radius shadow bg-white">
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-profile text-gray"></text>
+				<input class="username" value="{{username}}" bindinput="bindUsernameInput" placeholder="账号" auto-focus />
 			</view>
-			<image class="code-img" src="https://dl.reg.163.com/cp?pd=yanxuan_web&pkid=SkeBZeG&random=1489903563234"></image>
+			<view class="action" id="clear-username" bindtap="clearInput">
+				<text class="cuIcon-roundclose lg text-gray" wx:if="{{ username.length > 0 }}"></text>
+			</view>
+
+		</view>
+		<view class="cu-bar bg-white solid-bottom">
+			<view class="action">
+				<text class="cuIcon-lock text-gray"></text>
+				<input class="password" value="{{password}}" password bindinput="bindPasswordInput" placeholder="密码" />
+			</view>
+			<view class="action" id="clear-password" bindtap="clearInput">
+				<text class="cuIcon-roundclose lg text-gray" wx:if="{{ password.length > 0 }}"></text>
+			</view>
+		</view>
+		<view class="padding flex flex-direction">
+			<button class="cu-btn bg-grey lg" bindtap="getUserInfo">登录</button>
+		</view>
+		<view class="form-item-text">
+			<text class="register" bindtap="gotoRegister">注册账号</text>
 		</view>
 
-    	<button type="default" class="login-btn" bindtap="getUserInfo">登录</button>
-
-    	<view class="form-item-text">
-    		<navigator url="/pages/register/register" class="register">注册账号</navigator>
-			<navigator url="/pages/reset/reset" class="reset">忘记密码</navigator>
-    	</view>
-
-    </view>
+	</view>
 </view>

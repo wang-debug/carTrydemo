@@ -75,7 +75,7 @@
 .form-item-text .register{
   display: block;
   height: 34rpx;
-  float: left;
+  padding-left: 10px;
   font-size: 28rpx;
   color: #999;
 }

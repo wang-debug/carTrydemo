@@ -9,6 +9,7 @@ Page({
     password: '',
     confirmPassword: '',
     code: '',
+    group:null,
     loginErrorCount: 0
   },
   onLoad: function (options) {
@@ -31,13 +32,15 @@ Page({
     // 页面关闭
 
   },
+  reback(){
+    router.push({path:"index",openType:'redirect'})
+  },
   startRegister: function () {
     var that = this;
-
-    if (that.data.password.length < 3 || that.data.username.length < 3) {
+    if (that.data.password.length < 1 || that.data.username.length < 1) {
       wx.showModal({
         title: '错误信息',
-        content: '用户名和密码不得少于3位',
+        content: '用户名和密码不得少于1位',
         showCancel: false
       });
       return false;
@@ -83,6 +86,12 @@ Page({
     
     this.setData({
       username: e.detail.value
+    });
+  },
+  bindGroupInput: function (e) {
+    
+    this.setData({
+      group: e.detail.value
     });
   },
   bindPasswordInput: function (e) {

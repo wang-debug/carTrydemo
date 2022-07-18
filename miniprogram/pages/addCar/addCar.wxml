@@ -1,5 +1,5 @@
 <!--pages/addCar/addCar.wxml-->
-<cu-custom bgColor="bg-gradual-white" isBack="{{true}}">
+<cu-custom bgColor="bg-olive" isBack="{{true}}" url="personal" userinfo="{{username}}" company="{{company}}">
   <view slot="backText">返回</view>
   <view slot="content">新建车辆</view>
 </cu-custom>
@@ -9,7 +9,19 @@
     <input placeholder="输入车辆号牌" bindinput="bindCarNoInput" value="{{carNo}}"></input>
     <text class="cuIcon-camera text-orange" bindtap="carNoGet"></text>
   </view>
-  <view class="cu-bar bg-white margin-top">
+  <view class="cu-form-group">
+		<view class="title">车牌数量</view>
+		<picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+			<view class="picker">
+				{{index?picker[index]:'选择车牌数量'}}
+			</view>
+		</picker>
+	</view>
+  <view class="cu-form-group">
+		<view class="title">二维码</view>
+		<switch bindchange="changeCode"></switch>
+	</view>
+  <view class="cu-bar bg-white">
     <view class="action">
       整车图片上传
     </view>

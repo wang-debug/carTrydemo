@@ -79,7 +79,7 @@ router.get("/addCar", (req, res) => {
         // 存储数据到数据库
         let sqlStr = sql.carinfo.add;
         let conn = new DBHelper().getConn();
-        conn.query(sqlStr, [carInfo.username, carInfo.carNo, carInfo.date, carInfo.company, carInfo.wholePhoto], (err, result) => {
+        conn.query(sqlStr, [carInfo.username, carInfo.carNo, carInfo.date, carInfo.company, carInfo.wholePhoto,carInfo.plate_number,carInfo.is_code], (err, result) => {
             if (err) {
                 console.log(err)
                 res.json(err);
@@ -189,7 +189,7 @@ router.get("/updateCar", (req, res) => {
         // 存储数据到数据库
         let sqlStr = sql.carinfo.updateCar;
         let conn = new DBHelper().getConn();
-        conn.query(sqlStr, [carInfo.engine, carInfo.VIN, carInfo.traverse,carInfo.speedchanger, carInfo.front,carInfo.back,carInfo.username,carInfo.carNo], (err, result) => {
+        conn.query(sqlStr, [carInfo.engine, carInfo.VIN, carInfo.traverse,carInfo.speedchanger, carInfo.front,carInfo.back,carInfo.VIN_number,carInfo.engine_number,carInfo.username,carInfo.carNo], (err, result) => {
             if (err) {
                 console.log(err)
                 res.json(err);

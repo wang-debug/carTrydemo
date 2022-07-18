@@ -6,7 +6,8 @@ const routerPath = {
     "personal":"/pages/personal/personal",
     "company":"/pages/company/company",
     "addCar":"/pages/addCar/addCar",
-    "update":"/pages/update/update"
+    "update":"/pages/update/update",
+    "register":"/pages/register/register"
 }
 
 module.exports = {
@@ -34,7 +35,7 @@ module.exports = {
         if(openType === 'redirect'){
             wx.redirectTo(obj);
         }else if(openType === 'reLauch'){
-            wx.reLauch(obj);
+            wx.reLaunch(obj);
         }else if(openType === 'back'){
             wx.navigateBack({
                 delta:1
